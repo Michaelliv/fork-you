@@ -84,7 +84,7 @@ fu pipeline
 
 ## For Agents
 
-fu is designed to be used by AI agents. Onboard your agent:
+fu is designed to be used by agents. Onboard your agent:
 
 ```bash
 fu onboard
