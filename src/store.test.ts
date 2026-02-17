@@ -1,7 +1,16 @@
-import { expect, test, beforeEach, afterEach } from "bun:test";
-import { mkdirSync, rmSync, existsSync } from "node:fs";
+import { afterEach, beforeEach, expect, test } from "bun:test";
+import { existsSync, mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { initStore, findRoot, readAll, readOne, writeRecord, deleteRecord, newId, readConfig } from "./store";
+import {
+  deleteRecord,
+  findRoot,
+  initStore,
+  newId,
+  readAll,
+  readConfig,
+  readOne,
+  writeRecord,
+} from "./store";
 import type { Contact } from "./types";
 
 const TEST_DIR = join(import.meta.dir, "..", ".test-tmp");
@@ -29,7 +38,7 @@ test("findRoot finds .forkyou directory", () => {
   initStore();
   const root = findRoot();
   expect(root).not.toBeNull();
-  expect(root!.endsWith(".forkyou")).toBe(true);
+  expect(root?.endsWith(".forkyou")).toBe(true);
 });
 
 test("readConfig returns default config", () => {
@@ -51,8 +60,8 @@ test("writeRecord and readOne roundtrip", () => {
   writeRecord(root, "contacts", contact);
   const result = readOne<Contact>(root, "contacts", contact.id);
   expect(result).not.toBeNull();
-  expect(result!.name).toBe("Test User");
-  expect(result!.email).toBe("test@example.com");
+  expect(result?.name).toBe("Test User");
+  expect(result?.email).toBe("test@example.com");
 });
 
 test("readAll returns all records", () => {

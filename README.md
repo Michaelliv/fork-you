@@ -282,5 +282,5 @@ MIT
 ---
 
 <p align="center">
-  <b>fu 🤌</b> — <i>your pipeline, your repo, your data</i>
+  <b>fu 🤌</b> — <i>say fu to your CRM subscription</i>
 </p>
