@@ -30,7 +30,7 @@ What if your CRM was just files in a git repo?
 - **Team-friendly** — one file per record means no merge conflicts
 - **Works offline** — it's just files
 - **No vendor lock-in** — it's just JSON
-- **Agent-native** — every command supports `--json` output
+- **Agent-native** — lives where agents live: in your repo, on the CLI
 
 ---
 
