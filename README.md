@@ -84,13 +84,13 @@ fu pipeline
 
 ## For Agents
 
-fork-you is designed to be used by AI agents. Onboard your agent:
+fu is designed to be used by AI agents. Onboard your agent:
 
 ```bash
 fu onboard
 ```
 
-This adds fork-you instructions to your `CLAUDE.md` or `AGENTS.md`, teaching your agent how to manage your CRM.
+This adds fu instructions to your `CLAUDE.md` or `AGENTS.md`, teaching your agent how to manage your CRM.
 
 Every command supports `--json` for structured output:
 
@@ -227,7 +227,7 @@ Records reference each other by ID — a deal's `contacts` field is an array of 
 
 ### Querying
 
-fork-you uses **sql.js** (SQLite compiled to WASM) as an in-memory query engine. On every command:
+fu uses **sql.js** (SQLite compiled to WASM) as an in-memory query engine. On every command:
 
 1. Read all JSON files from `.forkyou/`
 2. Build an in-memory SQLite database

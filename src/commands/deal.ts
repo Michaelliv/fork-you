@@ -310,7 +310,7 @@ export async function dealMove(
   if (!id || !stage) {
     output(options, {
       json: () => ({ success: false, error: "missing_args" }),
-      human: () => error("Usage: fork-you deal move <id> <stage>"),
+      human: () => error("Usage: fu deal move <id> <stage>"),
     });
     process.exit(1);
   }

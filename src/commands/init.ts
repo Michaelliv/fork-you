@@ -24,6 +24,6 @@ export async function init(
   const root = initStore();
   output(options, {
     json: () => ({ success: true, path: root }),
-    human: () => success(`Initialized fork-you in ${root}`),
+    human: () => success(`Initialized fu in ${root}`),
   });
 }

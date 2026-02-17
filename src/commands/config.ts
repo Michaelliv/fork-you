@@ -51,7 +51,7 @@ export async function configStages(
   output(options, {
     json: () => ({ success: false, error: "unknown_args" }),
     human: () => {
-      error("Usage: fork-you config stages [--set stage1,stage2,...]");
+      error("Usage: fu config stages [--set stage1,stage2,...]");
     },
   });
   process.exit(1);

@@ -85,6 +85,6 @@ export async function onboard(
 
   output(options, {
     json: () => ({ success: true, file: targetFile }),
-    human: () => success(`Added fork-you instructions to ${targetFile}`),
+    human: () => success(`Added fu instructions to ${targetFile}`),
   });
 }
