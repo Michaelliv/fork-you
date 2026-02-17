@@ -39,55 +39,55 @@ import { pipeline } from "./commands/pipeline";
 import { taskAdd, taskDone, taskList, taskRm } from "./commands/task";
 
 const HELP = `
-fork-you - git-based CRM
+fu 🤌 - git-based CRM
 
 INIT
-  fork-you init                                 Create .forkyou/ in current repo
-  fork-you onboard                              Add agent instructions to CLAUDE.md or AGENTS.md
+  fu init                                 Create .forkyou/ in current repo
+  fu onboard                              Add agent instructions to CLAUDE.md or AGENTS.md
 
 CONTACTS
-  fork-you contact add --name <n> [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
-  fork-you contact list
-  fork-you contact show <id>
-  fork-you contact edit <id> [--name <n>] [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
-  fork-you contact rm <id>
-  fork-you contact search <query>
+  fu contact add --name <n> [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
+  fu contact list
+  fu contact show <id>
+  fu contact edit <id> [--name <n>] [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
+  fu contact rm <id>
+  fu contact search <query>
 
 COMPANIES
-  fork-you company add --name <n> [--domain <d>] [--industry <i>] [--size <s>]
-  fork-you company list
-  fork-you company show <id>
-  fork-you company edit <id> [--name <n>] [--domain <d>] [--industry <i>] [--size <s>]
-  fork-you company rm <id>
-  fork-you company search <query>
+  fu company add --name <n> [--domain <d>] [--industry <i>] [--size <s>]
+  fu company list
+  fu company show <id>
+  fu company edit <id> [--name <n>] [--domain <d>] [--industry <i>] [--size <s>]
+  fu company rm <id>
+  fu company search <query>
 
 DEALS
-  fork-you deal add --title <t> [--company <id>] [--contact <id>]... [--stage <s>] [--value <v>] [--probability <p>] [--close-date <d>]
-  fork-you deal list
-  fork-you deal show <id>
-  fork-you deal edit <id> [--title <t>] [--stage <s>] [--value <v>] ...
-  fork-you deal move <id> <stage>
-  fork-you deal rm <id>
-  fork-you deal search <query>
+  fu deal add --title <t> [--company <id>] [--contact <id>]... [--stage <s>] [--value <v>] [--probability <p>] [--close-date <d>]
+  fu deal list
+  fu deal show <id>
+  fu deal edit <id> [--title <t>] [--stage <s>] [--value <v>] ...
+  fu deal move <id> <stage>
+  fu deal rm <id>
+  fu deal search <query>
 
 ACTIVITIES
-  fork-you activity add --type <call|email|meeting|note> --subject <s> [--body <b>] [--contact <id>] [--deal <id>] [--company <id>] [--date <d>]
-  fork-you activity list
-  fork-you activity show <id>
-  fork-you activity rm <id>
+  fu activity add --type <call|email|meeting|note> --subject <s> [--body <b>] [--contact <id>] [--deal <id>] [--company <id>] [--date <d>]
+  fu activity list
+  fu activity show <id>
+  fu activity rm <id>
 
 TASKS
-  fork-you task add --title <t> [--contact <id>] [--deal <id>] [--company <id>] [--due <date>]
-  fork-you task list
-  fork-you task done <id>
-  fork-you task rm <id>
+  fu task add --title <t> [--contact <id>] [--deal <id>] [--company <id>] [--due <date>]
+  fu task list
+  fu task done <id>
+  fu task rm <id>
 
 PIPELINE
-  fork-you pipeline                             Show pipeline summary
+  fu pipeline                             Show pipeline summary
 
 CONFIG
-  fork-you config stages                        Show pipeline stages
-  fork-you config stages --set <s1,s2,s3,...>   Set pipeline stages
+  fu config stages                        Show pipeline stages
+  fu config stages --set <s1,s2,s3,...>   Set pipeline stages
 
 OPTIONS
   -h, --help                    Show help
@@ -121,7 +121,7 @@ async function main() {
     if (json) {
       console.log(JSON.stringify({ version }));
     } else if (!quiet) {
-      console.log(`fork-you ${version}`);
+      console.log(`fu 🤌 ${version}`);
     }
     process.exit(0);
   }

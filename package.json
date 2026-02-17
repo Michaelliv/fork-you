@@ -5,17 +5,17 @@
   "module": "src/main.ts",
   "type": "module",
   "bin": {
-    "fork-you": "./src/main.ts"
+    "fu": "./src/main.ts"
   },
   "files": [
     "src"
   ],
   "scripts": {
     "dev": "bun run src/main.ts",
-    "build": "bun build --compile src/main.ts --outfile fork-you",
-    "build:linux": "bun build --compile --target=bun-linux-x64 src/main.ts --outfile fork-you-linux-x64",
-    "build:mac-arm": "bun build --compile --target=bun-darwin-arm64 src/main.ts --outfile fork-you-darwin-arm64",
-    "build:mac-x64": "bun build --compile --target=bun-darwin-x64 src/main.ts --outfile fork-you-darwin-x64",
+    "build": "bun build --compile src/main.ts --outfile fu",
+    "build:linux": "bun build --compile --target=bun-linux-x64 src/main.ts --outfile fu-linux-x64",
+    "build:mac-arm": "bun build --compile --target=bun-darwin-arm64 src/main.ts --outfile fu-darwin-arm64",
+    "build:mac-x64": "bun build --compile --target=bun-darwin-x64 src/main.ts --outfile fu-darwin-x64",
     "test": "bun test",
     "format": "bunx biome format --write src/",
     "lint": "bunx biome lint src/",

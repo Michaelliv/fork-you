@@ -1,4 +1,4 @@
-# fork-you 🍴
+# fu 🤌
 
 [![License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
 
@@ -37,7 +37,7 @@ What if your CRM was just files in a git repo?
 ## Installation
 
 ```bash
-npm install -g fork-you
+npm install -g fork-you  # installs the "fu" command
 ```
 
 ---
@@ -46,25 +46,25 @@ npm install -g fork-you
 
 ```bash
 # Initialize CRM in your repo
-fork-you init
+fu init
 
 # Add a company
-fork-you company add --name "Acme Corp" --domain acme.com --industry SaaS
+fu company add --name "Acme Corp" --domain acme.com --industry SaaS
 
 # Add a contact (use the company ID from above)
-fork-you contact add --name "Jane Smith" --email jane@acme.com --role CTO --company <company-id>
+fu contact add --name "Jane Smith" --email jane@acme.com --role CTO --company <company-id>
 
 # Create a deal
-fork-you deal add --title "Enterprise License" --company <company-id> --contact <contact-id> --value 50000 --probability 60
+fu deal add --title "Enterprise License" --company <company-id> --contact <contact-id> --value 50000 --probability 60
 
 # Log an activity
-fork-you activity add --type call --subject "Discovery call" --contact <contact-id> --deal <deal-id>
+fu activity add --type call --subject "Discovery call" --contact <contact-id> --deal <deal-id>
 
 # Add a follow-up task
-fork-you task add --title "Send proposal" --contact <contact-id> --deal <deal-id> --due 2026-03-01
+fu task add --title "Send proposal" --contact <contact-id> --deal <deal-id> --due 2026-03-01
 
 # Check the pipeline
-fork-you pipeline
+fu pipeline
 ```
 
 ```
@@ -87,7 +87,7 @@ fork-you pipeline
 fork-you is designed to be used by AI agents. Onboard your agent:
 
 ```bash
-fork-you onboard
+fu onboard
 ```
 
 This adds fork-you instructions to your `CLAUDE.md` or `AGENTS.md`, teaching your agent how to manage your CRM.
@@ -95,7 +95,7 @@ This adds fork-you instructions to your `CLAUDE.md` or `AGENTS.md`, teaching you
 Every command supports `--json` for structured output:
 
 ```bash
-fork-you contact list --json
+fu contact list --json
 ```
 
 ```json
@@ -122,74 +122,74 @@ Agents can create contacts, log activities, move deals through the pipeline, and
 ### Contacts
 
 ```bash
-fork-you contact add --name <n> [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
-fork-you contact list
-fork-you contact show <id>
-fork-you contact edit <id> [--name <n>] [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
-fork-you contact rm <id>
-fork-you contact search <query>
+fu contact add --name <n> [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
+fu contact list
+fu contact show <id>
+fu contact edit <id> [--name <n>] [--email <e>] [--phone <p>] [--company <id>] [--role <r>]
+fu contact rm <id>
+fu contact search <query>
 ```
 
 ### Companies
 
 ```bash
-fork-you company add --name <n> [--domain <d>] [--industry <i>] [--size <s>]
-fork-you company list
-fork-you company show <id>
-fork-you company edit <id> [--name <n>] [--domain <d>] [--industry <i>] [--size <s>]
-fork-you company rm <id>
-fork-you company search <query>
+fu company add --name <n> [--domain <d>] [--industry <i>] [--size <s>]
+fu company list
+fu company show <id>
+fu company edit <id> [--name <n>] [--domain <d>] [--industry <i>] [--size <s>]
+fu company rm <id>
+fu company search <query>
 ```
 
 ### Deals
 
 ```bash
-fork-you deal add --title <t> [--company <id>] [--contact <id>]... [--stage <s>] [--value <v>] [--probability <p>] [--close-date <d>]
-fork-you deal list
-fork-you deal show <id>
-fork-you deal edit <id> [--title <t>] [--stage <s>] [--value <v>] ...
-fork-you deal move <id> <stage>
-fork-you deal rm <id>
-fork-you deal search <query>
+fu deal add --title <t> [--company <id>] [--contact <id>]... [--stage <s>] [--value <v>] [--probability <p>] [--close-date <d>]
+fu deal list
+fu deal show <id>
+fu deal edit <id> [--title <t>] [--stage <s>] [--value <v>] ...
+fu deal move <id> <stage>
+fu deal rm <id>
+fu deal search <query>
 ```
 
 Deals are grouped by pipeline stage. Move them forward:
 
 ```bash
-fork-you deal move abc123 proposal
+fu deal move abc123 proposal
 # ✓ Enterprise License: lead → proposal
 ```
 
 ### Activities
 
 ```bash
-fork-you activity add --type <call|email|meeting|note> --subject <s> [--body <b>] [--contact <id>] [--deal <id>] [--company <id>] [--date <d>]
-fork-you activity list
-fork-you activity show <id>
-fork-you activity rm <id>
+fu activity add --type <call|email|meeting|note> --subject <s> [--body <b>] [--contact <id>] [--deal <id>] [--company <id>] [--date <d>]
+fu activity list
+fu activity show <id>
+fu activity rm <id>
 ```
 
 ### Tasks
 
 ```bash
-fork-you task add --title <t> [--contact <id>] [--deal <id>] [--company <id>] [--due <date>]
-fork-you task list
-fork-you task done <id>
-fork-you task rm <id>
+fu task add --title <t> [--contact <id>] [--deal <id>] [--company <id>] [--due <date>]
+fu task list
+fu task done <id>
+fu task rm <id>
 ```
 
 ### Pipeline
 
 ```bash
-fork-you pipeline              # Summary with deal counts, values, weighted forecast
-fork-you pipeline --json       # Structured output
+fu pipeline              # Summary with deal counts, values, weighted forecast
+fu pipeline --json       # Structured output
 ```
 
 ### Config
 
 ```bash
-fork-you config stages                              # Show pipeline stages
-fork-you config stages --set lead,qualified,won,lost # Customize stages
+fu config stages                              # Show pipeline stages
+fu config stages --set lead,qualified,won,lost # Customize stages
 ```
 
 ### Global Flags
@@ -240,12 +240,12 @@ No cache, no sync, no stale data. `git pull` and you're immediately up to date. 
 
 ```bash
 # Alice adds a contact
-fork-you contact add --name "Bob Client" --email bob@client.com
+fu contact add --name "Bob Client" --email bob@client.com
 git add .forkyou/ && git commit -m "Add Bob Client"
 git push
 
 # Bob adds a deal (on another branch, no conflict)
-fork-you deal add --title "Bob's Deal" --value 10000
+fu deal add --title "Bob's Deal" --value 10000
 git add .forkyou/ && git commit -m "Add deal"
 git push
 
@@ -282,5 +282,5 @@ MIT
 ---
 
 <p align="center">
-  <b>fork-you</b> — <i>your pipeline, your repo, your data</i>
+  <b>fu 🤌</b> — <i>your pipeline, your repo, your data</i>
 </p>

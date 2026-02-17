@@ -40,7 +40,7 @@ export function findRoot(): string | null {
 export function requireRoot(): string {
   const root = findRoot();
   if (!root) {
-    console.error("Not a fork-you project. Run: fork-you init");
+    console.error("Not a fu project. Run: fu init");
     process.exit(1);
   }
   return root;
