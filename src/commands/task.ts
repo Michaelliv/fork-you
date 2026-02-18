@@ -1,3 +1,4 @@
+import { Command } from "commander";
 import { buildDb } from "../db.js";
 import {
   deleteRecord,
@@ -9,82 +10,56 @@ import {
 import type { Task } from "../types.js";
 import type { OutputOptions } from "../utils/output.js";
 import { bold, dim, error, info, output, success } from "../utils/output.js";
+import { resolveCompanyId } from "../utils/resolve.js";
 
-function parseTaskFlags(args: string[]): Partial<Task> {
-  const fields: Partial<Task> = {};
-  for (let i = 0; i < args.length; i++) {
-    const flag = args[i];
-    const val = args[i + 1];
-    if (!val) continue;
-    switch (flag) {
-      case "--title":
-        fields.title = val;
-        i++;
-        break;
-      case "--contact":
-        fields.contact = val;
-        i++;
-        break;
-      case "--deal":
-        fields.deal = val;
-        i++;
-        break;
-      case "--company":
-        fields.company = val;
-        i++;
-        break;
-      case "--due":
-        fields.due = val;
-        i++;
-        break;
-    }
-  }
-  return fields;
+function getOutputOptions(cmd: Command): OutputOptions {
+  const root = cmd.optsWithGlobals();
+  return { json: root.json, quiet: root.quiet };
 }
 
-export async function taskAdd(
-  args: string[],
-  options: OutputOptions,
-): Promise<void> {
-  const root = requireRoot();
-  const fields = parseTaskFlags(args);
+export const taskCommand = new Command("task");
 
-  if (!fields.title) {
+taskCommand
+  .command("add")
+  .requiredOption("--title <title>", "Task title")
+  .option("--contact <id>", "Contact ID")
+  .option("--deal <id>", "Deal ID")
+  .option("--company <id-or-name>", "Company ID or name")
+  .option("--due <date>", "Due date")
+  .action((opts, cmd) => {
+    const options = getOutputOptions(cmd);
+    const root = requireRoot();
+
+    const company = opts.company
+      ? resolveCompanyId(root, opts.company)
+      : undefined;
+
+    const now = new Date().toISOString();
+    const task: Task = {
+      id: newId(),
+      title: opts.title,
+      contact: opts.contact,
+      deal: opts.deal,
+      company,
+      due: opts.due,
+      done: false,
+      created: now,
+      updated: now,
+    };
+
+    writeRecord(root, "tasks", task);
+
     output(options, {
-      json: () => ({ success: false, error: "missing_title" }),
-      human: () => error("--title is required"),
+      json: () => ({ success: true, task }),
+      human: () =>
+        success(
+          `Task added: ${task.title} (${task.id})${task.due ? ` due ${task.due}` : ""}`,
+        ),
     });
-    process.exit(1);
-  }
-
-  const now = new Date().toISOString();
-  const task: Task = {
-    id: newId(),
-    title: fields.title,
-    contact: fields.contact,
-    deal: fields.deal,
-    company: fields.company,
-    due: fields.due,
-    done: false,
-    created: now,
-    updated: now,
-  };
-
-  writeRecord(root, "tasks", task);
-
-  output(options, {
-    json: () => ({ success: true, task }),
-    human: () =>
-      success(
-        `Task added: ${task.title} (${task.id})${task.due ? ` due ${task.due}` : ""}`,
-      ),
   });
-}
 
-export async function taskList(
-  _args: string[],
-  options: OutputOptions,
-): Promise<void> {
+taskCommand.command("list").action(async (_opts, cmd) => {
+  const options = getOutputOptions(cmd);
   const root = requireRoot();
   const db = await buildDb(root);
 
@@ -126,68 +101,52 @@ export async function taskList(
       );
     },
   });
-}
+});
 
-export async function taskDone(
-  args: string[],
-  options: OutputOptions,
-): Promise<void> {
-  const root = requireRoot();
-  const id = args[0];
+taskCommand
+  .command("done")
+  .argument("<id>", "Task ID")
+  .action((id, _opts, cmd) => {
+    const options = getOutputOptions(cmd);
+    const root = requireRoot();
 
-  if (!id) {
+    const task = readOne<Task>(root, "tasks", id);
+    if (!task) {
+      output(options, {
+        json: () => ({ success: false, error: "not_found", id }),
+        human: () => error(`Task not found: ${id}`),
+      });
+      process.exit(1);
+    }
+
+    task.done = true;
+    task.updated = new Date().toISOString();
+    writeRecord(root, "tasks", task);
+
     output(options, {
-      json: () => ({ success: false, error: "missing_id" }),
-      human: () => error("Task ID required"),
+      json: () => ({ success: true, task }),
+      human: () => success(`Task completed: ${task.title}`),
     });
-    process.exit(1);
-  }
-
-  const task = readOne<Task>(root, "tasks", id);
-  if (!task) {
-    output(options, {
-      json: () => ({ success: false, error: "not_found", id }),
-      human: () => error(`Task not found: ${id}`),
-    });
-    process.exit(1);
-  }
-
-  task.done = true;
-  task.updated = new Date().toISOString();
-  writeRecord(root, "tasks", task);
-
-  output(options, {
-    json: () => ({ success: true, task }),
-    human: () => success(`Task completed: ${task.title}`),
   });
-}
 
-export async function taskRm(
-  args: string[],
-  options: OutputOptions,
-): Promise<void> {
-  const root = requireRoot();
-  const id = args[0];
+taskCommand
+  .command("rm")
+  .argument("<id>", "Task ID")
+  .action((id, _opts, cmd) => {
+    const options = getOutputOptions(cmd);
+    const root = requireRoot();
 
-  if (!id) {
+    const deleted = deleteRecord(root, "tasks", id);
+    if (!deleted) {
+      output(options, {
+        json: () => ({ success: false, error: "not_found", id }),
+        human: () => error(`Task not found: ${id}`),
+      });
+      process.exit(1);
+    }
+
     output(options, {
-      json: () => ({ success: false, error: "missing_id" }),
-      human: () => error("Task ID required"),
+      json: () => ({ success: true, id }),
+      human: () => success(`Task removed: ${id}`),
     });
-    process.exit(1);
-  }
-
-  const deleted = deleteRecord(root, "tasks", id);
-  if (!deleted) {
-    output(options, {
-      json: () => ({ success: false, error: "not_found", id }),
-      human: () => error(`Task not found: ${id}`),
-    });
-    process.exit(1);
-  }
-
-  output(options, {
-    json: () => ({ success: true, id }),
-    human: () => success(`Task removed: ${id}`),
   });
-}
