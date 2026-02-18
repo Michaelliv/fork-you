@@ -8,8 +8,8 @@ import {
 } from "node:fs";
 import { join } from "node:path";
 import { nanoid } from "nanoid";
-import type { Config } from "./types";
-import { DEFAULT_CONFIG } from "./types";
+import type { Config } from "./types.js";
+import { DEFAULT_CONFIG } from "./types.js";
 
 const FORKYOU_DIR = ".forkyou";
 

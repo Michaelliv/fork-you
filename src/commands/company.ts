@@ -1,14 +1,14 @@
-import { buildDb } from "../db";
+import { buildDb } from "../db.js";
 import {
   deleteRecord,
   newId,
   readOne,
   requireRoot,
   writeRecord,
-} from "../store";
-import type { Company } from "../types";
-import type { OutputOptions } from "../utils/output";
-import { bold, dim, error, info, output, success } from "../utils/output";
+} from "../store.js";
+import type { Company } from "../types.js";
+import type { OutputOptions } from "../utils/output.js";
+import { bold, dim, error, info, output, success } from "../utils/output.js";
 
 function parseCompanyFlags(args: string[]): Partial<Company> {
   const fields: Partial<Company> = {};

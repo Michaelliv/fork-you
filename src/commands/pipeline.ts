@@ -1,7 +1,7 @@
-import { buildDb } from "../db";
-import { readConfig, requireRoot } from "../store";
-import type { OutputOptions } from "../utils/output";
-import { bold, dim, info, output } from "../utils/output";
+import { buildDb } from "../db.js";
+import { readConfig, requireRoot } from "../store.js";
+import type { OutputOptions } from "../utils/output.js";
+import { bold, dim, info, output } from "../utils/output.js";
 
 export async function pipeline(
   _args: string[],

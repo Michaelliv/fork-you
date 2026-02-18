@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import type { OutputOptions } from "../utils/output";
-import { output, success } from "../utils/output";
+import type { OutputOptions } from "../utils/output.js";
+import { output, success } from "../utils/output.js";
 
 const FORKYOU_INSTRUCTIONS = `
 <fork-you>

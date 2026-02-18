@@ -1,14 +1,14 @@
-import { buildDb } from "../db";
+import { buildDb } from "../db.js";
 import {
   deleteRecord,
   newId,
   readOne,
   requireRoot,
   writeRecord,
-} from "../store";
-import type { Task } from "../types";
-import type { OutputOptions } from "../utils/output";
-import { bold, dim, error, info, output, success } from "../utils/output";
+} from "../store.js";
+import type { Task } from "../types.js";
+import type { OutputOptions } from "../utils/output.js";
+import { bold, dim, error, info, output, success } from "../utils/output.js";
 
 function parseTaskFlags(args: string[]): Partial<Task> {
   const fields: Partial<Task> = {};

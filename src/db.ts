@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import initSqlJs, { type Database as SqlJsDatabase } from "sql.js";
-import { readAll } from "./store";
-import type { Activity, Company, Contact, Deal, Task } from "./types";
+import { readAll } from "./store.js";
+import type { Activity, Company, Contact, Deal, Task } from "./types.js";
 
 const require = createRequire(import.meta.url);
 

@@ -1,12 +1,14 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
-import { version } from "../package.json";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json");
 import {
   activityAdd,
   activityList,
   activityRm,
   activityShow,
-} from "./commands/activity";
+} from "./commands/activity.js";
 import {
   companyAdd,
   companyEdit,
@@ -14,8 +16,8 @@ import {
   companyRm,
   companySearch,
   companyShow,
-} from "./commands/company";
-import { configStages } from "./commands/config";
+} from "./commands/company.js";
+import { configStages } from "./commands/config.js";
 import {
   contactAdd,
   contactEdit,
@@ -23,7 +25,7 @@ import {
   contactRm,
   contactSearch,
   contactShow,
-} from "./commands/contact";
+} from "./commands/contact.js";
 import {
   dealAdd,
   dealEdit,
@@ -32,11 +34,11 @@ import {
   dealRm,
   dealSearch,
   dealShow,
-} from "./commands/deal";
-import { init } from "./commands/init";
-import { onboard } from "./commands/onboard";
-import { pipeline } from "./commands/pipeline";
-import { taskAdd, taskDone, taskList, taskRm } from "./commands/task";
+} from "./commands/deal.js";
+import { init } from "./commands/init.js";
+import { onboard } from "./commands/onboard.js";
+import { pipeline } from "./commands/pipeline.js";
+import { taskAdd, taskDone, taskList, taskRm } from "./commands/task.js";
 
 const HELP = `
 fu 🤌 - git-based CRM

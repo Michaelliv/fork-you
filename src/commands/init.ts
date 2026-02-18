@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { initStore } from "../store";
-import type { OutputOptions } from "../utils/output";
-import { output, success, warn } from "../utils/output";
+import { initStore } from "../store.js";
+import type { OutputOptions } from "../utils/output.js";
+import { output, success, warn } from "../utils/output.js";
 
 export async function init(
   _args: string[],

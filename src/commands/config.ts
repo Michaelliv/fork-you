@@ -1,6 +1,6 @@
-import { readConfig, requireRoot, writeConfig } from "../store";
-import type { OutputOptions } from "../utils/output";
-import { bold, dim, error, output, success } from "../utils/output";
+import { readConfig, requireRoot, writeConfig } from "../store.js";
+import type { OutputOptions } from "../utils/output.js";
+import { bold, dim, error, output, success } from "../utils/output.js";
 
 export async function configStages(
   args: string[],
